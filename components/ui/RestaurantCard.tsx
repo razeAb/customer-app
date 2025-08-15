@@ -1,7 +1,5 @@
 // components/ui/RestaurantCard.tsx
-import { useRouter } from "expo-router";
 import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-const router = useRouter();
 
 type Props = {
   name: string;
