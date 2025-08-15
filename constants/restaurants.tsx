@@ -9,7 +9,7 @@ export const restaurants = [
   },
   {
     id: "2",
-    name: "Falafel King Yarka",
+    name: "Falafel King Yarka a7lef",
     description: "Crispy falafel, fresh pita",
     url: "https://example.com/falafel-king",
     image: "https://example.com/images/falafelking.jpg", // Replace with real image URL

@@ -16,7 +16,7 @@ export default function RestaurantCard({ name, description, url, image, isOpen }
       <View style={styles.info}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.desc}>{description}</Text>
-        <Text style={{ color: isOpen ? "green" : "red" }}>{isOpen ? "Open" : "Closed"}</Text>
+        <Text style={[styles.status, { color: isOpen ? "#34C759" : "#FF3B30" }]}>{isOpen ? "Open" : "Closed"}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -24,26 +24,39 @@ export default function RestaurantCard({ name, description, url, image, isOpen }
 
 const styles = StyleSheet.create({
   card: {
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: 10,
     marginHorizontal: 16,
     backgroundColor: "#fff",
-    borderRadius: 10,
+    borderRadius: 12,
     overflow: "hidden",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
     elevation: 3,
   },
   image: {
     width: "100%",
-    height: 150,
+    height: 100,
   },
   info: {
-    padding: 10,
+    flex: 1,
+    padding: 12,
   },
   name: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 17,
+    fontWeight: "600",
+    color: "#1C1C1E",
   },
   desc: {
     marginTop: 4,
-    color: "#555",
+    color: "#6E6E73",
+  },
+  status: {
+    marginTop: 4,
+    fontSize: 13,
+    fontWeight: "500",
   },
 });
