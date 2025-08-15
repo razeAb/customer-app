@@ -1,5 +1,6 @@
 // components/ui/RestaurantCard.tsx
-import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   name: string;
@@ -10,8 +11,10 @@ type Props = {
 };
 
 export default function RestaurantCard({ name, description, url, image, isOpen }: Props) {
+  const navigation = useNavigation<any>();
+
   return (
-    <TouchableOpacity style={styles.card} onPress={() => Linking.openURL(url)}>
+    <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("RestaurantWebView", { url, name })}>
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.info}>
         <Text style={styles.name}>{name}</Text>
