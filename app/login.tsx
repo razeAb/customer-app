@@ -1,19 +1,19 @@
 // app/login.tsx
+import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
+import { Stack, useRouter } from "expo-router";
 import React, { useMemo, useState } from "react";
 import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  Pressable,
+  Alert,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
+  SafeAreaView,
   ScrollView,
-  Alert,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
-import { Stack, useRouter } from "expo-router";
-import { Feather, Ionicons, AntDesign } from "@expo/vector-icons";
 
 const SPACING = 16;
 const RADIUS_XL = 24;
@@ -52,7 +52,8 @@ export default function LoginScreen() {
       // TODO: call your API here
       await new Promise((r) => setTimeout(r, 700));
       router.replace("/"); // go to Home on success
-    } catch (e) {
+    } catch (error) {
+      console.error(error);
       Alert.alert("Sign in failed", "Please check your details and try again.");
     } finally {
       setSubmitting(false);
@@ -63,10 +64,7 @@ export default function LoginScreen() {
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.bg }}>
       <Stack.Screen options={{ headerShown: false }} />
 
-      <KeyboardAvoidingView
-        behavior={Platform.select({ ios: "padding", android: undefined })}
-        style={{ flex: 1 }}
-      >
+      <KeyboardAvoidingView behavior={Platform.select({ ios: "padding", android: undefined })} style={{ flex: 1 }}>
         <ScrollView
           bounces
           contentContainerStyle={{ padding: SPACING }}
@@ -108,9 +106,7 @@ export default function LoginScreen() {
                 onChangeText={setEmail}
                 returnKeyType="next"
               />
-              {email.length > 0 && !emailError ? (
-                <AntDesign name="checkcircle" size={18} color="#22C55E" />
-              ) : null}
+              {email.length > 0 && !emailError ? <AntDesign name="checkcircle" size={18} color="#22C55E" /> : null}
             </View>
             {!!emailError && <Text style={styles.errorText}>{emailError}</Text>}
 
@@ -134,10 +130,7 @@ export default function LoginScreen() {
 
             {/* Row: Remember me + Forgot */}
             <View style={styles.rowBetween}>
-              <Pressable
-                onPress={() => setRemember((r) => !r)}
-                style={styles.rememberWrap}
-              >
+              <Pressable onPress={() => setRemember((r) => !r)} style={styles.rememberWrap}>
                 <View style={[styles.checkbox, remember && styles.checkboxOn]}>
                   {remember && <AntDesign name="check" size={14} color="#fff" />}
                 </View>
@@ -153,22 +146,15 @@ export default function LoginScreen() {
             <Pressable
               onPress={onSubmit}
               disabled={!canSubmit}
-              style={({ pressed }) => [
-                styles.primaryBtn,
-                (!canSubmit || pressed) && { opacity: 0.9 },
-              ]}
+              style={({ pressed }) => [styles.primaryBtn, (!canSubmit || pressed) && { opacity: 0.9 }]}
             >
-              <Text style={styles.primaryBtnText}>
-                {submitting ? "Signing in…" : "Sign In"}
-              </Text>
+              <Text style={styles.primaryBtnText}>{submitting ? "Signing in…" : "Sign In"}</Text>
             </Pressable>
 
             {/* Divider */}
             <View style={styles.dividerRow}>
               <View style={styles.divider} />
-              <Text style={{ color: COLORS.sub, fontSize: 13, marginHorizontal: 8 }}>
-                or continue with
-              </Text>
+              <Text style={{ color: COLORS.sub, fontSize: 13, marginHorizontal: 8 }}>or continue with</Text>
               <View style={styles.divider} />
             </View>
 
@@ -188,10 +174,7 @@ export default function LoginScreen() {
             <View style={{ marginTop: 18, alignItems: "center" }}>
               <Text style={{ color: COLORS.sub }}>
                 Don’t have an account?{" "}
-                <Text
-                  onPress={() => router.push("/signup")}
-                  style={[styles.linkText, { fontWeight: "700" }]}
-                >
+                <Text onPress={() => router.push("/signup")} style={[styles.linkText, { fontWeight: "700" }]}>
                   Sign Up
                 </Text>
               </Text>
