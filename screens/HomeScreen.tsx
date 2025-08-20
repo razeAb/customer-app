@@ -15,7 +15,7 @@ export default function HomeScreen(): JSX.Element {
         data={restaurants}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (
-          <RestaurantCard name={item.name} description={item.description} url={item.url} image={item.image} isOpen={item.isOpen} />
+          <RestaurantCard name={item.name} description={item.description} url={item.url} image={item.image} isOpen={item.isOpen} id={""} />
         )}
         contentContainerStyle={styles.listContent}
         ListHeaderComponent={
