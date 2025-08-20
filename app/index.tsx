@@ -1,6 +1,7 @@
 // app/index.tsx
 import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Stack, useRouter } from "expo-router";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { Stack, useNavigation, useRouter } from "expo-router";
 import React, { useMemo, useState } from "react";
 import { Dimensions, FlatList, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { restaurants } from "../constants/restaurants";
@@ -32,6 +33,8 @@ const CATEGORIES = [
 
 export default function HomeScreen() {
   const router = useRouter();
+  const navigation = useNavigation<DrawerNavigationProp<any>>();
+
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
   const openRestaurants = useMemo(() => restaurants.filter((r) => r.isOpen), []);
@@ -51,7 +54,7 @@ export default function HomeScreen() {
         <View style={styles.surface}>
           {/* Top row */}
           <View style={styles.topRow}>
-            <Pressable style={styles.avatarBtn}>
+            <Pressable style={styles.avatarBtn} onPress={() => navigation.openDrawer()}>
               <Feather name="menu" size={22} color={COLORS.iconDark} />
             </Pressable>
 
